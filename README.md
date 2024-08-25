@@ -76,7 +76,7 @@ O servidor estará rodando em http://localhost:3000.
 2. Faça o upload do código do projeto para a instância.
 3. Instale as dependências e inicie o servidor.
 
-### Configuração da Instância EC2
+### Configuração da Instância RDS
 
 1. Crie uma instância RDS com PostgreSQL.
 2. Configure a conexão com o banco de dados na instância EC2, ajustando o arquivo .env e db.js com as credenciais do RDS.
