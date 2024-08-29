@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@
     </div> 
     <div class="Content">
         <h1>cadastrar novo cliente</h1>
-        <form>
+        <form id="clienteForm">
             <label for="name">nome:</label>
             <input type="text" id="name" name="name" required>
             
@@ -25,13 +25,14 @@
             <input type="text" id="cpf" name="cpf" required>
             
             <label for="dob">data de nascimento:</label>
-            <input type="text" id="dob" name="dob" required>
+            <input type="text" id="dob" name="data_nascimento" required>
             
             <label for="email">e-mail:</label>
             <input type="text" id="email" name="email" required>
             
             <button type="submit">cadastrar</button>
         </form>
+        <script src="./scripts/cadastro.js"></script>
     </div>
 </div>
 </body>

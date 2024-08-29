@@ -34,15 +34,7 @@
 
         </form>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const params = new URLSearchParams(window.location.search);
-            document.getElementById('name').value = params.get('nome') || '';
-            document.getElementById('cpf').value = params.get('cpf') || '';
-            document.getElementById('dob').value = params.get('dob') || '';
-            document.getElementById('email').value = params.get('email') || '';
-        });
-    </script>
+    <script src="./scripts/editar.js"></script>
 </div>
 </body>
 </html>
