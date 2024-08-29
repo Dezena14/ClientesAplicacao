@@ -1,5 +1,5 @@
 function fetchClients() {
-    fetch('http://34.203.228.20:3000/clientes')  // Ajuste a URL conforme necessário
+    fetch('http://172.31.91.228:3000/clientes')  // Ajuste a URL conforme necessário
         .then(response => response.json())
         .then(data => {
             const tableBody = document.querySelector('#manageTable tbody');

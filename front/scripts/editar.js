@@ -6,7 +6,7 @@ function editClient(event) {
 
     const clientId = new URLSearchParams(window.location.search).get('id');  // Supondo que você tenha passado o ID como parâmetro
 
-    fetch(`http://localhost:3000/api/clientes/${clientId}`, {  // Ajuste a URL conforme necessário
+    fetch(`http://172.31.91.228:3000/api/clientes/${clientId}`, {  // Ajuste a URL conforme necessário
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -24,7 +24,7 @@ function editClient(event) {
 document.querySelector('form').addEventListener('submit', editClient);
 
 function deleteClient(clientId) {
-    fetch(`http://34.203.228.20:3000/api/clientes/${clientId}`, {  // Ajuste a URL conforme necessário
+    fetch(`http://172.31.91.228:3000/api/clientes/${clientId}`, {  // Ajuste a URL conforme necessário
         method: 'DELETE'
     })
     .then(response => response.json())

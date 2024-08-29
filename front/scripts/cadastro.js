@@ -6,7 +6,7 @@ document.getElementById('clienteForm').addEventListener('submit', function(event
 
     console.log(data);
 
-    fetch('http://34.203.228.20:3000/clientes', {  // Arrumar a URL
+    fetch('http://172.31.91.228:3000/clientes', {  // Arrumar a URL
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
