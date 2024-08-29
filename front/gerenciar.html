@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>buscar cliente</title>
+    <link rel="stylesheet" href="components.css">
+    <link rel="stylesheet" href="sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="Sidebar">
+        <button onclick="location.href='index.html'">cadastrar cliente</button>
+        <button class="active">gerenciar cliente</button>
+        <button onclick="location.href='listar.html'">listar clientes</button>
+    </div> 
+    <div class="Content">
+        <h1>buscar cliente</h1>
+        <div class="SearchContainer">
+            <input type="text" id="searchInput" placeholder="Digite um nome ou CPF...">
+            <button type="button" class="form-button" onclick="searchClients(event)">buscar</button>
+        </div>
+        <div id="searchResults" style="display: none;">
+            <h2>resultado</h2>
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th>nome</th>
+                        <th>cpf</th>
+                        <th>data de nascimento</th>
+                        <th>e-mail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Search results will be inserted here -->
+                </tbody>
+            </table>
+            <div class="action-buttons">
+                <button class="action-button edit-button" onclick="editClient()">editar</button>
+                <button class="action-button delete-button">deletar</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function searchClients(event) {
+            event.preventDefault();
+            const results = [
+                { nome: 'John Doe', cpf: '123.456.789-00', email: 'john@example.com', dob: '01/01/1990' },
+            ];
+
+            const resultsTable = document.getElementById('resultsTable').getElementsByTagName('tbody')[0];
+            resultsTable.innerHTML = '';
+
+
+            results.forEach(result => {
+                const row = document.createElement('tr');
+
+                const nameCell = document.createElement('td');
+                nameCell.textContent = result.nome;
+                row.appendChild(nameCell);
+
+                const cpfCell = document.createElement('td');
+                cpfCell.textContent = result.cpf;
+                row.appendChild(cpfCell);
+
+                const emailCell = document.createElement('td');
+                emailCell.textContent = result.email;
+                row.appendChild(emailCell);
+
+                const dobCell = document.createElement('td');
+                dobCell.textContent = result.dob;
+                row.appendChild(dobCell);
+
+                resultsTable.appendChild(row);
+            });
+
+            searchResults.style.display = 'block';
+            document.getElementById('searchInput').value = ''
+        }
+
+        function editClient(client) {
+            const queryParams = new URLSearchParams(client).toString();
+            location.href = `editar.html?${queryParams}`;
+        }
+    </script>
+</body>
+</html>
