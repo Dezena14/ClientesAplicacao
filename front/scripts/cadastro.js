@@ -4,7 +4,9 @@ document.getElementById('clienteForm').addEventListener('submit', function(event
     const formData = new FormData(this);
     const data = Object.fromEntries(formData.entries());
 
-    fetch('http://localhost:3000/api/clientes', {  // Arrumar a URL
+    console.log(data);
+
+    fetch('http://34.203.228.20:3000/clientes', {  // Arrumar a URL
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -13,7 +15,11 @@ document.getElementById('clienteForm').addEventListener('submit', function(event
     })
     .then(response => response.json())
     .then(result => {
-        alert('Cliente cadastrado com sucesso!');
+        if(result.error){
+            alert('Erro ao cadastrar o cliente!');
+        } else {
+            alert('Cliente cadastrado com sucesso!');
+        }
         console.log(result);
         this.reset();  // Reseta o formulário
     })

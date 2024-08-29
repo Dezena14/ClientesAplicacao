@@ -9,79 +9,73 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="Sidebar">
-        <button onclick="location.href='index.html'">cadastrar cliente</button>
-        <button class="active">gerenciar cliente</button>
-        <button onclick="location.href='listar.html'">listar clientes</button>
-    </div> 
-    <div class="Content">
-        <h1>buscar cliente</h1>
-        <div class="SearchContainer">
-            <input type="text" id="searchInput" placeholder="Digite um nome ou CPF...">
-            <button type="button" class="form-button" onclick="searchClients(event)">buscar</button>
-        </div>
-        <div id="searchResults" style="display: none;">
-            <h2>resultado</h2>
-            <table id="resultsTable">
-                <thead>
-                    <tr>
-                        <th>nome</th>
-                        <th>cpf</th>
-                        <th>data de nascimento</th>
-                        <th>e-mail</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Search results will be inserted here -->
-                </tbody>
-            </table>
-            <div class="action-buttons">
-                <button class="action-button edit-button" onclick="editClient()">editar</button>
-                <button class="action-button delete-button">deletar</button>
-            </div>
-        </div>
+<div class="Sidebar">
+    <button onclick="location.href='index.html'">cadastrar cliente</button>
+    <button class="active">gerenciar cliente</button>
+    <button onclick="location.href='listar.html'">listar clientes</button>
+</div>
+<div class="Content">
+    <h1>buscar cliente</h1>
+    <div class="SearchContainer">
+        <input type="text" id="searchInput" placeholder="Digite um nome ou CPF...">
+        <button type="button" class="form-button" onclick="searchClients(event)">buscar</button>
     </div>
-    <script>
-        function searchClients(event) {
-            event.preventDefault();
-            const results = [
-                { nome: 'John Doe', cpf: '123.456.789-00', email: 'john@example.com', dob: '01/01/1990' },
-            ];
+    <div id="test" style="display: flex; flex-direction: column">
 
-            const resultsTable = document.getElementById('resultsTable').getElementsByTagName('tbody')[0];
-            resultsTable.innerHTML = '';
+    </div>
+
+    <div class="action-buttons">
+        <button class="action-button edit-button" onclick="editClient()">editar</button>
+        <button class="action-button delete-button">deletar</button>
+    </div>
+</div>
+<script>
+    function searchClients(event) {
+        event.preventDefault();
+
+        console.log("Buscando clientes...");
 
 
-            results.forEach(result => {
-                const row = document.createElement('tr');
+        const searchTerm = document.getElementById('searchInput').value;
 
-                const nameCell = document.createElement('td');
-                nameCell.textContent = result.nome;
-                row.appendChild(nameCell);
+        console.log(searchTerm);
+        fetch('http://34.203.228.20:3000/clientes')  // Ajuste a URL conforme necessário
+            .then(response => response.json())
+            .then(data => {
+                const filteredResults = data.filter(client =>
+                    client.nome.includes(searchTerm) || client.cpf.includes(searchTerm)
+                );
 
-                const cpfCell = document.createElement('td');
-                cpfCell.textContent = result.cpf;
-                row.appendChild(cpfCell);
+                const tableBody = document.querySelector('#test');
+                tableBody.innerHTML = '';  // Limpa o conteúdo atual
 
-                const emailCell = document.createElement('td');
-                emailCell.textContent = result.email;
-                row.appendChild(emailCell);
 
-                const dobCell = document.createElement('td');
-                dobCell.textContent = result.dob;
-                row.appendChild(dobCell);
+                filteredResults.map((client, index) => {
+                    const row = document.createElement('div');
+                    if (index === 0) {
+                        sessionStorage.setItem("idSearch", client.id);
+                        console.log(client.id);
+                        console.log(localStorage.getItem("idSearch"));
+                    }
 
-                resultsTable.appendChild(row);
-            });
+                    row.innerHTML = `
+                    <div  class="table-cell">${client.nome}</div>
+                    <div  class="table-cell">${client.cpf}</div>
+                    <div  class="table-cell">${client.data_nascimento}</div>
+                    <div  class="table-cell">${client.email}</div>
+                `;
+                    const rowNome = document.createElement('div');
+                    rowNome.innerHTML =
+                        tableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Erro ao buscar clientes:', error));
+    }
 
-            searchResults.style.display = 'block';
-            document.getElementById('searchInput').value = ''
-        }
-
-        function editClient(client) {
-            const queryParams = new URLSearchParams(client).toString();
-            location.href = `editar.html?${queryParams}`;
-        }
-    </script>
+    function editClient(client) {
+        const queryParams = new URLSearchParams(client).toString();
+        location.href = `editar.html?${queryParams}`;
+    }
+</script>
 </body>
 </html>

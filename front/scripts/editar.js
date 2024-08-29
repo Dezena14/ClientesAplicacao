@@ -24,7 +24,7 @@ function editClient(event) {
 document.querySelector('form').addEventListener('submit', editClient);
 
 function deleteClient(clientId) {
-    fetch(`http://localhost:3000/api/clientes/${clientId}`, {  // Ajuste a URL conforme necessário
+    fetch(`http://34.203.228.20:3000/api/clientes/${clientId}`, {  // Ajuste a URL conforme necessário
         method: 'DELETE'
     })
     .then(response => response.json())

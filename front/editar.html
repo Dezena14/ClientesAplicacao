@@ -30,11 +30,62 @@
             <label for="email">e-mail:</label>
             <input type="text" id="email" name="email" required>
             
-            <button type="submit" onclick="location.href='gerenciar.html'">confirmar</button>
+            <button onclick="editClient()">confirmar</button>
 
         </form>
     </div>
     <script src="./scripts/editar.js"></script>
 </div>
 </body>
+<script>
+    // função para preenche tudo assim que a pagina é carregada
+    window.onload = fillClient;
+
+    function fillClient() {
+        console.log("Editando cliente...");
+        console.log(sessionStorage.getItem("idSearch"));
+        fetch(`http://34.203.228.20t:3000/clientes/${sessionStorage.getItem("idSearch")}`)  // Ajuste a URL conforme necessário
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                document.getElementById('name').value = data.nome;
+                document.getElementById('cpf').value = data.cpf;
+                document.getElementById('dob').value = data.data_nascimento;
+                document.getElementById('email').value = data.email;
+            });
+    }
+
+    function editClient() {
+        console.log("Editando cliente...");
+        const name = document.getElementById('name').value;
+        const cpf = document.getElementById('cpf').value;
+        const dob = document.getElementById('dob').value;
+        const email = document.getElementById('email').value;
+
+        const client = {
+            nome: name,
+            cpf: cpf,
+            data_nascimento: dob,
+            email: email
+        };
+
+        fetch(`http://34.203.228.20:3000/clientes/${sessionStorage.getItem("idSearch")}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(client)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Cliente editado com sucesso:', data);
+                alert('Cliente editado com sucesso!');
+                location.href = 'gerenciar.html';
+            })
+            .catch(error => {
+                console.error('Erro ao editar cliente:', error);
+                alert('Erro ao editar cliente!');
+            });
+    }
+</script>
 </html>

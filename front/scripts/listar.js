@@ -1,5 +1,5 @@
 function fetchClients() {
-    fetch('http://localhost:3000/api/clientes')  // Ajuste a URL conforme necessário
+    fetch('http://34.203.228.20:3000/clientes')  // Ajuste a URL conforme necessário
         .then(response => response.json())
         .then(data => {
             const tableBody = document.querySelector('#manageTable tbody');
