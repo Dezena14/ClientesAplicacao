@@ -1,6 +1,5 @@
 // back/app.js
 
-require('dotenv').config();
 require('./config/db');
 const express = require('express');
 const clienteRoutes = require('./routes/clienteRoutes');

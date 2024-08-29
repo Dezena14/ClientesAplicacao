@@ -37,16 +37,7 @@ Este é um projeto simples de CRUD (Create, Read, Update, Delete) desenvolvido c
     ```bash
     npm install
 
-3. Configure as variáveis de ambiente. Crie um arquivo .env na pasta back/ e defina as seguintes variáveis:
-
-    ```
-    DB_USER=user
-    DB_HOST=host
-    DB_NAME=name
-    DB_PASSWORD=password
-    DB_PORT=port
-
-4. Altere a configuração do banco de dados no arquivo back/config/db.js conforme necessário para o ambiente de produção.
+3. Altere a configuração do banco de dados no arquivo back/config/db.js conforme necessário para o ambiente de produção.
 
 ### Execução
 
